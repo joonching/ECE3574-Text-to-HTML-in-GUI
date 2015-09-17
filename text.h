@@ -15,8 +15,8 @@ public:
 	void enterFiles(char* argv[]);
 	void headerCheck(vector<string> &temp1, int size, int count, string &strLine);
 	void starCheck(vector<string> &temp2);
-	string searchI(vector<string> &temp2, string strLine2, int x, int i);
-	string searchB(vector<string> &temp2, string strLine2, int x, int i);
+	string searchStar(string &strLine2);
+
 
 
 private:
