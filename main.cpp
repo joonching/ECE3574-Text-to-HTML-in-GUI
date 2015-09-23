@@ -1,13 +1,22 @@
-#include "qtmarkup.h"
+#include <QtGui/QApplication>
+#include <QHBoxLayout>
+#include <QSlider>
+#include <QSpinBox>
+#include <QTextEdit>
+#include <QWebView>
+#include "gui.h"
 
-#include <QApplication>
-#include <QPushButton>
+
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
-    QPushButton button("Hello world");
-    button.show();
+   QApplication app(argc, argv);
 
-    return app.exec();
+   convert me;
+   me.showWindow();
+   return app.exec();
 }
+ //cmake ../textCmake
+//make
+
+
