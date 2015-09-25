@@ -4,7 +4,6 @@
 convert::convert()
 {
     textEdit = new QTextEdit;
-    textE = new QTextEdit;
     mainWindow = new QWidget;
     layout = new QHBoxLayout;
     webView = new QWebView;
@@ -24,6 +23,7 @@ QString convert::parse(std::string plainText)
     QVector<std::string>::const_iterator iter;
     std::string parse = plainText,
             str = "<p>", line = "";
+
        if (!parse.empty())
        {
            for (int i = 0; parse[i] != '\0'; i++)
@@ -56,7 +56,8 @@ QString convert::parse(std::string plainText)
                    str = str + parse[i];
 
            }
-         //  qDebug() << paragraphs.size();
+           //for check method;
+         vStr = paragraphs;
             headerCheck(paragraphs);
          }//end of if
 
@@ -70,7 +71,8 @@ QString convert::parse(std::string plainText)
 
       QString printLine = QString::fromStdString(line);
 
-       printLine = "<html><body>" + printLine +"</html></body>";
+       printLine = "<html><body>" + printLine +"</body></html>";
+
        returnStr = printLine;
        return printLine;
 
@@ -96,7 +98,7 @@ void convert::headerCheck(QVector<std::string> &checkString)
            charLine = checkString[i];
 
            checkSize(prevLine, charLine, charSize, prevSize);
-            qDebug() << charSize << prevSize;
+
                //check for the size and -3 because this is the case where its the beginning of a new string
                if (charSize >= prevSize)
                {
@@ -104,16 +106,17 @@ void convert::headerCheck(QVector<std::string> &checkString)
                    if (checkString.at(i)[0] == '=')
                    {
                        checkString[i-1] = "<h1>" + prevLine + "</h1>";
+                       h1Str = checkString[i-1];
                    }
 
                    if (checkString.at(i)[0] == '-')
                    {
                        checkString[i-1] = "<h2>" + prevLine + "</h2>";
+                       h2Str = checkString[i-1];
                    }
+
                     checkString.remove(i);
                } //end of if
-
-
        } //end of if
    }//end of for
 }
@@ -134,7 +137,7 @@ void convert::checkSize(std::string &previousLine, std::string characterLine, in
     int charSize = 0;
 
      if (findC != std::string::npos)
-         charSize = characterLine.size()-3;
+         charSize = characterLine.size()-4;
 
 
      else
@@ -208,6 +211,7 @@ std::string convert::searchStar(std::string &strLine2)
 
 void convert::checkBold(std::string &bLine, int &i)
 {
+
     int j = 0;
     std::string bold = "";
     bool check = false,
@@ -236,6 +240,7 @@ void convert::checkBold(std::string &bLine, int &i)
         bLine.replace(i, j + 4, bold);
         i = 0;
     }
+    bStr = QString::fromStdString(bold);
     bold = "";
 
 }
@@ -270,7 +275,7 @@ void convert::checkItalicize(std::string &iLine, int &i)
         iLine.replace(i, j + 2, italicize);
         i = 0;
     }
-
+    iStr = QString::fromStdString(italicize);
     italicize = "";
 
 }
@@ -313,4 +318,31 @@ QTextEdit *convert::returnText()
 QString *convert::returnString()
 {
     return &returnStr;
+}
+
+QString convert::returnI()
+{
+    return iStr;
+}
+
+QString convert::returnB()
+{
+    return bStr;
+}
+
+QString convert::returnH1()
+{
+    QString h = QString::fromStdString(h1Str);
+    return h;
+}
+
+QString convert::returnH2()
+{
+    QString h = QString::fromStdString(h2Str);
+    return h;
+}
+
+QVector<std::string> convert::returnV()
+{
+    return vStr;
 }

@@ -35,16 +35,22 @@ public:
     void showWindow();
     void showtext();
     void setWindowLayout();
-    QString save(QString savedStr);
     void setup();
     QString parse(std::string plainText);
     void headerCheck(QVector<std::string> &checkString);
     std::string searchStar(std::string & strLine2);
     void checkItalicize(std::string &iLine, int &i);
     void checkBold(std::string &bLine, int &i);
+    void checkHeader(bool &checkChar, int &size, int &cSize, std::string cLine);
+
+    //TESTING FUNCTIONS
     QTextEdit* returnText();
     QString* returnString();
-    void checkHeader(bool &checkChar, int &size, int &cSize, std::string cLine);
+    QString returnI();
+    QString returnB();
+    QString returnH1();
+    QString returnH2();
+    QVector<std::string> returnV();
 
 private slots:
     void printToWeb();
@@ -53,13 +59,15 @@ private slots:
 
 private:
     QWebView *webView;
-    QTextEdit *textEdit,
-               *textE;
+    QTextEdit *textEdit;
     QHBoxLayout *layout;
     QWidget *mainWindow;
     QKeySequence *openCall;
     QMenu *menu;
     QString returnStr;
+    QString iStr, bStr;
+    std::string h1Str,h2Str;
+    QVector<std::string> vStr;
 
 };
 
