@@ -7,3 +7,4 @@ into an html script.
 It allows adding bold, italic, and headers.
 
 
+![git1](https://cloud.githubusercontent.com/assets/17180094/13039002/22e244ca-d368-11e5-9a72-389a875b0b66.png)
